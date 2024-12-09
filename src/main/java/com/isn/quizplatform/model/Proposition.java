@@ -1,4 +1,6 @@
-package com.repository;
+package com.isn.quizplatform.model;
+
+import jakarta.persistence.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
