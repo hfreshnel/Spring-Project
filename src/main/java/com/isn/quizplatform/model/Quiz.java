@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity 
 @Table(name = "quiz") 
-public class Quiz {
+public class Quiz { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Generation automatique de l'id
