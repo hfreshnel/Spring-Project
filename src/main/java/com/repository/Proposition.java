@@ -1,7 +1,9 @@
 package com.repository;
 
-
+@Entity
 public class Proposition {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int correct;
     private String libelle;
     private Long id;
