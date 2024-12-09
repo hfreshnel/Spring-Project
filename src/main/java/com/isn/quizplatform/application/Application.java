@@ -1,13 +1,13 @@
-package com.isn.quizplatform.quizplatform;
+package com.isn.quizplatform.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class QuizplatformApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuizplatformApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
