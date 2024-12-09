@@ -1,6 +1,7 @@
 package com.isn.quizplatform.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isn.quizplatform.model.Personne;
@@ -11,8 +12,13 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class AuthService {
 
-	@Autowired
 	private PersonneRepository PR;
+	private BCryptPasswordEncoder passwordEncoder;
+	
+    public AuthService(PersonneRepository PR, BCryptPasswordEncoder passwordEncoder) {
+        this.PR = PR;
+        this.passwordEncoder = passwordEncoder;
+    }
 	
 	public void register(Personne personne) {
 		PR.findByEmail(personne.getMail())
@@ -20,6 +26,9 @@ public class AuthService {
 			throw new RuntimeException("Un utilisateur avec cet email existe déjà");
 		});
 		
+		String hashedPassword = passwordEncoder.encode(personne.getMdp());
+        personne.setMdp(hashedPassword);
+
 		PR.save(personne);
 		}
 	
@@ -27,7 +36,7 @@ public class AuthService {
 		Personne personne = PR.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("E-mail ou mot de passe invalide"));
 
-        if (!personne.getMdp().equals(password)) {
+        if (!passwordEncoder.matches(password, personne.getMdp())) {
             throw new RuntimeException("E-mail ou mot de passe invalide");
         }
         
