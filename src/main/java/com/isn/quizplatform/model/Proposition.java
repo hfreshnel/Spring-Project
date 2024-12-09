@@ -1,5 +1,7 @@
 package com.isn.quizplatform.model;
 
+import jakarta.persistence.*;
+
 @Entity
 public class Proposition {
     @Id
