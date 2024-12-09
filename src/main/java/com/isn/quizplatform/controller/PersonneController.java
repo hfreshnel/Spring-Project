@@ -1,5 +1,5 @@
 package com.isn.quizplatform.controller;
 
-public class QuizController {
-
+public class PersonneController {
+    
 }
