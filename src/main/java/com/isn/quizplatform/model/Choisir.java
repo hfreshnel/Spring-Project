@@ -2,6 +2,7 @@ package com.isn.quizplatform.model;
 
 import java.sql.Timestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,17 +17,18 @@ public class Choisir {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personne_id")
+    @JoinColumn(name = "idPersonne")
     private Personne personne;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quiz_id")
+    @JoinColumn(name = "idQuiz")
     private Quiz quiz;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proposition_id")
+    @JoinColumn(name = "idProposition")
     private Proposition proposition;
 
+    @Column(name = "heure")
     private Timestamp heure;
 
     public Choisir() {
