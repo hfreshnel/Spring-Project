@@ -17,11 +17,11 @@ public class Question {
 
     private String libelle;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Permet la relaiton avec la classe quiz en mode lazy
+    @ManyToMany(fetch = FetchType.LAZY) // Permet la relaiton avec la classe quiz en mode lazy
     @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) // Relation avec Proposition
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER) // Relation avec Proposition
     private List<Proposition> propositions;
 
 
