@@ -3,12 +3,11 @@ package com.isn.quizplatform.model;
 import jakarta.persistence.*;
 import java.util.List;
 
-
 /**
  * Classe question
  */
 @Entity
-@Table(name="question")
+@Table(name = "question")
 public class Question {
 
     @Id
@@ -17,20 +16,14 @@ public class Question {
 
     private String libelle;
 
-    @ManyToMany(fetch = FetchType.LAZY) // Permet la relaiton avec la classe quiz en mode lazy
-    @JoinColumn(name = "quiz_id", nullable = false)
-    private Quiz quiz;
-
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER) // Relation avec Proposition
     private List<Proposition> propositions;
-
 
     public Question() {
     }
 
-    public Question(String libelle, Quiz quiz) {
+    public Question(String libelle) {
         this.libelle = libelle;
-        this.quiz = quiz;
     }
 
     public Long getId() {
@@ -49,14 +42,6 @@ public class Question {
         this.libelle = libelle;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
     public List<Proposition> getPropositions() {
         return propositions;
     }
@@ -65,5 +50,26 @@ public class Question {
         this.propositions = propositions;
     }
 
-}
+    private String toStringPropositions() {
+        StringBuilder list = new StringBuilder();
+        for (Proposition proposition : propositions) {
+            list.append(proposition.toString()).append(", ");
+        }
+        // Retire la dernière virgule et l'espace, si nécessaire
+        if (!propositions.isEmpty()) {
+            list.setLength(list.length() - 2);
+        }
+        return list.toString();
+    }
 
+    @Override
+    public String toString() {
+        return "Question {" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                ", propositions={"
+                + (propositions != null && !propositions.isEmpty() ? toStringPropositions() : "aucune proposition") +
+                "}}";
+    }
+
+}
