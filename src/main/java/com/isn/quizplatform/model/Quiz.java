@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+
 @Entity 
 @Table(name = "quiz") 
 public class Quiz { 
@@ -30,10 +32,6 @@ public class Quiz {
     @Column(name = "dateDebutQuestion")
     private Timestamp dateDebutQuestion;
 
-    @ManyToOne
-    @JoinColumn(name = "idChoisir", nullable = false)
-    private Choisir choisir;
-
     @ManyToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
@@ -42,7 +40,7 @@ public class Quiz {
 
     public Quiz(Long id, String libelle, int etat, Timestamp dateDebutQuiz, 
                 int noQuestionCourante, int etape, Timestamp dateDebutQuestion, 
-                Choisir choisir, List<Question> questions) {
+                List<Question> questions) {
         this.id = id;
         this.libelle = libelle;
         this.etat = etat;
@@ -50,7 +48,6 @@ public class Quiz {
         this.noQuestionCourante = noQuestionCourante;
         this.etape = etape;
         this.dateDebutQuestion = dateDebutQuestion;
-        this.choisir = choisir;
         this.questions = questions;
     }
 
@@ -111,13 +108,6 @@ public class Quiz {
         this.dateDebutQuestion = dateDebutQuestion;
     }
 
-    public Choisir getChoisir() {
-        return choisir;  
-    }
-
-    public void setChoisir(Choisir choisir) {
-        this.choisir = choisir;
-    }
 
     public List<Question> getQuestions() {
         return questions;
@@ -126,4 +116,18 @@ public class Quiz {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+    @Override
+public String toString() {
+    return "Quiz{" +
+            "id=" + id +
+            ", libelle='" + libelle + '\'' +
+            ", etat=" + etat +
+            ", dateDebutQuiz=" + dateDebutQuiz +
+            ", noQuestionCourante=" + noQuestionCourante +
+            ", etape=" + etape +
+            ", dateDebutQuestion=" + dateDebutQuestion +
+            ", questions=" + (questions != null ? questions.size() : 0) +
+            '}';
+}
+
 }
