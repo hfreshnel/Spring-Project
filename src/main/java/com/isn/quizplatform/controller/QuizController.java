@@ -39,7 +39,7 @@ public class QuizController {
         Quiz newQuiz = quizService.createQuiz(quiz);
         return ResponseEntity.ok(newQuiz);
     }
-
+/* 
     // Mettre à jour un quiz
     @PutMapping("/{id}")
     public ResponseEntity<Quiz> updateQuiz(@PathVariable Long id, @RequestBody Quiz quizDetails) {
@@ -59,46 +59,6 @@ public class QuizController {
         }
         return ResponseEntity.noContent().build();
     }
-    /* 
-    // Récupérer toutes les questions d'un quiz
-    @GetMapping("/{id}/questions")
-    public ResponseEntity<List<Question>> getQuestionsByQuiz(@PathVariable Long id) {
-        List<Question> questions = quizService.getQuestionsByQuiz(id);
-        if (questions == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(questions);
-    }
-
-    // Ajouter une nouvelle question à un quiz
-    @PostMapping("/{id}/question")
-    public ResponseEntity<Question> addQuestionToQuiz(@PathVariable Long id, @RequestBody Question question) {
-        Question newQuestion = quizService.addQuestionToQuiz(id, question);
-        if (newQuestion == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(newQuestion);
-    }
 */
-
-/* 
-    // Obtenir les statistiques d’un quiz
-    @GetMapping("/{id}/stats")
-    public ResponseEntity<Object> getQuizStats(@PathVariable Long id) {
-        Object stats = quizService.getQuizStats(id);
-        if (stats == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(stats);
-    }
-*/
-    // Mettre à jour l’étape actuelle d’un quiz
-    @PutMapping("/{id}/etape")
-    public ResponseEntity<Quiz> updateEtape(@PathVariable Long id, @RequestParam int etape) {
-        Quiz updatedQuiz = quizService.updateEtape(id, etape);
-        if (updatedQuiz == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(updatedQuiz);
-    }
+   
 }
