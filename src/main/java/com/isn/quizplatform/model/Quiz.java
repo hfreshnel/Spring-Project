@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 
 @Entity 
 @Table(name = "quiz") 
