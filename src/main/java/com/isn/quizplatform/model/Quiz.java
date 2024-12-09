@@ -42,7 +42,7 @@ public class Quiz {
 
     public Quiz(Long id, String libelle, int etat, Timestamp dateDebutQuiz, 
                 int noQuestionCourante, int etape, Timestamp dateDebutQuestion, 
-                Personne personne, List<Question> questions) {
+                Choisir choisir, List<Question> questions) {
         this.id = id;
         this.libelle = libelle;
         this.etat = etat;
@@ -50,7 +50,7 @@ public class Quiz {
         this.noQuestionCourante = noQuestionCourante;
         this.etape = etape;
         this.dateDebutQuestion = dateDebutQuestion;
-        this.personne = personne;
+        this.choisir = choisir;
         this.questions = questions;
     }
 
@@ -111,12 +111,12 @@ public class Quiz {
         this.dateDebutQuestion = dateDebutQuestion;
     }
 
-    public Personne getPersonne() {
-        return personne;
+    public Choisir getChoisir() {
+        return choisir;
     }
 
-    public void setPersonne(Personne personne) {
-        this.personne = personne;
+    public void setChoisir(Choisir choisir) {
+        this.choisir = choisir;
     }
 
     public List<Question> getQuestions() {
