@@ -112,7 +112,7 @@ public class Quiz {
     }
 
     public Choisir getChoisir() {
-        return choisir;
+        return choisir;  
     }
 
     public void setChoisir(Choisir choisir) {
