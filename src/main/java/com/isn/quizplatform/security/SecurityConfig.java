@@ -1,4 +1,4 @@
-package com.is.quizplatform.security;
+package com.isn.quizplatform.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
