@@ -1,12 +1,15 @@
-package com.repository;
+package com.isn.quizplatform.model;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Proposition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private int correct;
     private String libelle;
-    private Long id;
     
 
 
