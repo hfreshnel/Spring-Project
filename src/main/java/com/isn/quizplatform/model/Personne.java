@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 public class Personne {
 
@@ -24,20 +24,10 @@ public class Personne {
 
     private int role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "choisir_id")
+    @OneToMany(mappedBy = "personne")
     private List<Choisir> choix;
 
     public Personne() {
-    }
-
-    public Personne(Long id, String nom, String prenom, String mail, String mdp, int role) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.mail = mail;
-        this.mdp = mdp;
-        this.role = role;
     }
 
     public Personne(String nom, String prenom, String mail, String mdp, int role) {
