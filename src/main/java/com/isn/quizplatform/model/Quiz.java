@@ -18,23 +18,23 @@ public class Quiz {
     @Column(name = "etat", nullable = false)
     private int etat;
 
-    @Column(name = "date_debut_quiz") 
+    @Column(name = "dateDebutQuiz") 
     private Timestamp dateDebutQuiz;
 
-    @Column(name = "no_question_courante")
+    @Column(name = "numeroQuestionCourante")
     private int noQuestionCourante;
 
     @Column(name = "etape")
     private int etape;
 
-    @Column(name = "date_debut_question")
+    @Column(name = "dateDebutQuestion")
     private Timestamp dateDebutQuestion;
 
     @ManyToOne
-    @JoinColumn(name = "personne_id", nullable = false)
+    @JoinColumn(name = "choisir_id", nullable = false)
     private Personne personne;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
     // Constructeurs
