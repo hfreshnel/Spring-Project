@@ -1,4 +1,4 @@
-package com.repository;
+package com.isn.quizplatform.model;
 
 @Entity
 public class Proposition {
