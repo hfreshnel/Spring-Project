@@ -31,8 +31,8 @@ public class Quiz {
     private Timestamp dateDebutQuestion;
 
     @ManyToOne
-    @JoinColumn(name = "choisir_id", nullable = false)
-    private Personne personne;
+    @JoinColumn(name = "idChoisir", nullable = false)
+    private Choisir choisir;
 
     @ManyToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
