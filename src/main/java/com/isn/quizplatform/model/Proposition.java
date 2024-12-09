@@ -6,9 +6,10 @@ import jakarta.persistence.*;
 public class Proposition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private int correct;
     private String libelle;
-    private Long id;
     
 
 
