@@ -70,12 +70,17 @@ public class QuestionController {
 	  * @return
 	  */
 	 @PutMapping("/admin/questions/{questionId}")
-	    public ResponseEntity<Question> updateQuestion(
-	            @PathVariable Long questionId, @RequestBody Question updatedQuestion) {
-	        Optional<Question> updated = questionService.updateQuestion(questionId, updatedQuestion);
-	        return updated.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-	    }
-	 
+	 public ResponseEntity<Question> updateQuestion(
+	         @PathVariable Long questionId, @RequestBody Question updatedQuestion) {
+	     updatedQuestion.setId(questionId);
+	     try {
+	         Question updated = questionService.updateQuestion(updatedQuestion);
+	         return ResponseEntity.ok(updated);
+	     } catch (RuntimeException e) {
+	         return ResponseEntity.notFound().build();
+	     }
+	 }
+
 	 /**
 	  * Méthode permettant de supprimer une question
 	  * @param questionId
