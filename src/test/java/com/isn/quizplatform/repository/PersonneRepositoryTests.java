@@ -1,37 +1,38 @@
 package com.isn.quizplatform.repository;
 
-import com.isn.quizplatform.model.Personne;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
+import com.isn.quizplatform.model.Personne;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-class PersonneRepositoryTests {
+import java.util.Optional;
 
-    @Autowired
-    private TestEntityManager entityManager;
+@ActiveProfiles("test")  // Utilisation du profil 'test'
+@SpringBootTest(classes = com.isn.quizplatform.application.Application.class)
+public class PersonneRepositoryTests {
 
     @Autowired
     private PersonneRepository repository;
 
     @Test
     void testFindById() {
-        // Arrange : Préparation des données
-        Personne personne = new Personne("Math", "Anderson", "test@mail", "test", 0);
-        entityManager.persist(personne);
-        entityManager.flush();
+        // Arrange
+        Personne mockPersonne = new Personne("Math", "Anderson", "test@mail", "test", 0);
+        mockPersonne.setId(1L);
+        repository.save(mockPersonne); // Sauvegarde dans la base H2 en mémoire
 
-        // Act : Appel de la méthode à tester
-        Personne found = repository.findById(personne.getId()).orElse(null);
+        // Act
+        Optional<Personne> found = repository.findById(1L);
 
-        // Assert : Vérification des résultats
-        assertThat(found).isNotNull();
-        assertThat(found.getNom()).isEqualTo("Math");
-        assertThat(found.getPrenom()).isEqualTo("Anderson");
-        assertThat(found.getMail()).isEqualTo("test@mail");
+        // Assert
+        assertThat(found).isPresent();
+        assertThat(found.get().getNom()).isEqualTo("Math");
+        assertThat(found.get().getPrenom()).isEqualTo("Anderson");
+        assertThat(found.get().getMail()).isEqualTo("test@mail");
     }
-
 }
+
