@@ -11,13 +11,18 @@ import jakarta.persistence.Id;
 public class Proposition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int correct;
-    private String libelle;
     private Long id;
+
+    @Column(name = "correct")
+    private int correct;
+
+    @Column(name = "libelle")
+    private String libelle;
 
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
+
 
     public Proposition(){}
 
