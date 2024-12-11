@@ -1,16 +1,9 @@
 package com.isn.quizplatform.model;
 
+
 import java.sql.Timestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Entity;
-
+import jakarta.persistence.*;
 
 @Entity
 public class Choisir {
@@ -86,4 +79,5 @@ public class Choisir {
     public String toString() {
         return "Choisir [id=" + id + ", personne=" + personne + ", quiz=" + quiz + ", heure=" + heure + "]";
     }
+
 }
