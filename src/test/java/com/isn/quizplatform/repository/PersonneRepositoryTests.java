@@ -31,7 +31,7 @@ class PersonneRepositoryTests {
         assertThat(found).isNotNull();
         assertThat(found.getNom()).isEqualTo("Math");
         assertThat(found.getPrenom()).isEqualTo("Anderson");
-        assertThat(found.getEmail()).isEqualTo("test@mail");
+        assertThat(found.getMail()).isEqualTo("test@mail");
     }
 
 }
