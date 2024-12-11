@@ -40,7 +40,7 @@ public class PropositionController {
 		
 	}
 	
-	@DeleteMapping("/delete}")
+	@DeleteMapping("/delete")
 	public String delete(@PathVariable Long id) {
 		return propositionService.supprimer(id);
 	}
