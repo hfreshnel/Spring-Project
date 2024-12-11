@@ -1,7 +1,7 @@
 package com.isn.quizplatform.controller;
 
 import com.isn.quizplatform.model.Quiz;
-// import com.isn.quizplatform.model.Question;
+import com.isn.quizplatform.model.Question;
 import com.isn.quizplatform.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class QuizController {
         Quiz newQuiz = quizService.createQuiz(quiz);
         return ResponseEntity.ok(newQuiz);
     }
-/* 
+
     // Mettre à jour un quiz
     @PutMapping("/{id}")
     public ResponseEntity<Quiz> updateQuiz(@PathVariable Long id, @RequestBody Quiz quizDetails) {
@@ -59,6 +59,6 @@ public class QuizController {
         }
         return ResponseEntity.noContent().build();
     }
-*/
+
    
 }

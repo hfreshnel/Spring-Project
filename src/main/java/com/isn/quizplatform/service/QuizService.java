@@ -3,9 +3,9 @@ package com.isn.quizplatform.service;
 
 
 import com.isn.quizplatform.model.Quiz;
-//import com.isn.quizplatform.model.Question;
+import com.isn.quizplatform.model.Question;
 import com.isn.quizplatform.repository.QuizRepository;
-//import com.isn.quizplatform.repository.QuestionRepository;
+import com.isn.quizplatform.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class QuizService {
     private QuizRepository quizRepository;
 
     @Autowired
-   // private QuestionRepository questionRepository;
+    private QuestionRepository questionRepository;
 
     // Récupérer tous les quiz
     public List<Quiz> getAllQuiz() {
@@ -38,7 +38,7 @@ public class QuizService {
     }
 
     
-    /*
+    
 
     // Mettre à jour un quiz
     public Quiz updateQuiz(Long id, Quiz quizDetails) {
@@ -64,8 +64,7 @@ public class QuizService {
         }
         return false;
     }
-        
-     */
+
   
 }
 
