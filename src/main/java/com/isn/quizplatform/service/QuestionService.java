@@ -29,12 +29,11 @@ public class QuestionService {
         return questionimpl.save(question);
     }
 
-    public Optional<Question> updateQuestion(Long questionId, Question updatedQuestion) {
-        return questionimpl.findById(questionId).map(existingQuestion -> {
-          
-            return questionimpl.save(existingQuestion);
-        });
+    public Question updateQuestion(Question updatedQuestion) {
+        return questionimpl.save(updatedQuestion);
     }
+
+    
 
     public boolean deleteQuestion(Long questionId) {
         if (questionimpl.existsById(questionId)) {
