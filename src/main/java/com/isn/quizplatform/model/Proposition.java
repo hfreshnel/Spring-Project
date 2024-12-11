@@ -8,11 +8,12 @@ public class Proposition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "correct")
     private int correct;
+
+    @Column(name = "libelle")
     private String libelle;
     
-
-
     public Proposition(){}
 
     public Proposition (int correct, String libelle, Long id)
