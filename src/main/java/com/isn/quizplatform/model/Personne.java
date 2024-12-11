@@ -1,11 +1,10 @@
 package com.isn.quizplatform.model;
-import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Personne {
@@ -13,19 +12,21 @@ public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(name = "nom")
     private String nom;
 
+    @Column(name = "prenom")
     private String prenom;
 
+    @Column(name = "mail")
     private String mail;
 
+    @Column(name = "mdp")
     private String mdp;
 
+    @Column(name = "role")
     private int role;
-
-    @OneToMany(mappedBy = "personne")
-    private List<Choisir> choix;
 
     public Personne() {
     }
@@ -84,14 +85,6 @@ public class Personne {
 
     public void setRole(int role) {
         this.role = role;
-    }
-
-    public List<Choisir> getChoix() {
-        return choix;
-    }
-
-    public void setChoix(List<Choisir> choix) {
-        this.choix = choix;
     }
     
     @Override

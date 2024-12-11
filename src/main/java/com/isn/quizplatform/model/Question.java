@@ -14,9 +14,11 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "libelle")
     private String libelle;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER) // Relation avec Proposition
+    @OneToMany(fetch = FetchType.EAGER) 
+    @JoinColumn(name = "question_id")
     private List<Proposition> propositions;
 
     public Question() {
