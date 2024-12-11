@@ -31,7 +31,7 @@ public class Quiz {
     @Column(name = "dateDebutQuestion")
     private Timestamp dateDebutQuestion;
 
-    @ManyToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
     // Constructeurs

@@ -14,8 +14,10 @@ public class Proposition {
     private int correct;
     private String libelle;
     private Long id;
-    
 
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
 
     public Proposition(){}
 

@@ -25,12 +25,8 @@ public class AuthController {
 	}
 	
 	@PostMapping("/public/auth/login")
-	public void login(@RequestBody LoginRequest loginrequest, HttpSession session) {
-		AS.login(loginrequest.getEmail(), loginrequest.getPassword(), session);
+	public Personne  login(@RequestBody LoginRequest loginrequest) {
+		return AS.login(loginrequest.getEmail(), loginrequest.getPassword());
 	}
-	
-	@PostMapping("/public/auth/logout")
-	public void logout(HttpSession session) {
-		AS.logout(session);
-	}
+
 }

@@ -20,6 +20,11 @@ public class Question {
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER) 
     private List<Proposition> propositions;
 
+    @ManyToOne
+    @JoinColumn(name = "quiz_id", nullable = false)
+    private Quiz quiz;
+
+
     public Question() {
     }
 

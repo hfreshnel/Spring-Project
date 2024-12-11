@@ -7,7 +7,7 @@ import com.isn.quizplatform.model.*;
 
 public interface PersonneRepository extends JpaRepository<Personne, Long>{
 
-	Optional<Personne> findByEmail(String email);
+	Optional<Personne> findByMail(String email);
 
 }
 

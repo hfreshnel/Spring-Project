@@ -1,4 +1,4 @@
-package com.isn.quizplatform.application;
+package com.isn.quizplatform;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -21,7 +21,7 @@ public class AuthService {
     }
 	
 	public void register(Personne personne) {
-		PR.findByEmail(personne.getMail())
+		PR.findByMail(personne.getMail())
 		.ifPresent(existingPersonne -> {
 			throw new RuntimeException("Un utilisateur avec cet email existe déjà");
 		});
@@ -32,22 +32,20 @@ public class AuthService {
 		PR.save(personne);
 		}
 	
-	public void login(String email, String password, HttpSession session) {
-		Personne personne = PR.findByEmail(email)
+	public Personne login(String email, String password) {
+		Personne personne = PR.findByMail(email)
                 .orElseThrow(() -> new RuntimeException("E-mail ou mot de passe invalide"));
 
         if (!passwordEncoder.matches(password, personne.getMdp())) {
             throw new RuntimeException("E-mail ou mot de passe invalide");
         }
-        
-        session.setAttribute("userId", personne.getId());
-        session.setAttribute("userEmail", personne.getMail());
+
+		if (personne.getRole() == 0) {
+			personne.setRole(0);
+		}
+
         System.out.println("Utilisateur connecté avec succès : " + personne.getMail());
+		return personne;
 	}
-	
-	public void logout(HttpSession session) {
-		session.invalidate();
-	    System.out.println("Utilisateur déconnecté avec succès");
-	}
-	
+
 }
