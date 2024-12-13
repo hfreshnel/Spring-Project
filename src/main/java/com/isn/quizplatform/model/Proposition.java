@@ -19,10 +19,6 @@ public class Proposition {
     @Column(name = "libelle")
     private String libelle;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    private Question question;
-
 
     public Proposition(){}
 
