@@ -28,9 +28,17 @@ public class QuizService {
 
     // Récupérer un quiz spécifique par son ID
     public Quiz getQuizById(Long id) {
-        Optional<Quiz> quiz = quizRepository.findById(id);
-        return quiz.orElse(null);
+        try {
+            Optional<Quiz> quiz = quizRepository.findById(id);
+            return quiz.orElse(null);
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la récupération du quiz avec ID : " + id);
+            e.printStackTrace();
+            // Retourner null ou lever une exception personnalisée si nécessaire
+            return null;
+        }
     }
+
 
     // Créer un nouveau quiz
     public Quiz createQuiz(Quiz quiz) {
