@@ -26,12 +26,25 @@ public class Proposition {
 
     public Proposition(){}
 
-    public Proposition (int correct, String libelle, Long id)
+    public Proposition (int correct, String libelle)
     {   
-        super();
+        this.correct = correct;
+        this.libelle = libelle;
+    }
+
+    public Proposition (Long id, int correct, String libelle)
+    {   
+        this.id = id;
         this.correct = correct;
         this.libelle = libelle;
         this.id = id;
+    }
+
+    public Proposition (int correct, String libelle, Question question)
+    {   
+        this.correct = correct;
+        this.libelle = libelle;
+        this.question = question;
     }
 
     public int getCorrect() {

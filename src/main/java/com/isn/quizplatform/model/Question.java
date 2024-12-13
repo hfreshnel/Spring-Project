@@ -33,6 +33,11 @@ public class Question {
         this.libelle = libelle;
     }
 
+    public Question(String libelle, List<Proposition> propositions) {
+        this.libelle = libelle;
+        this.propositions = propositions;
+    }
+
     public Long getId() {
         return id;
     }
