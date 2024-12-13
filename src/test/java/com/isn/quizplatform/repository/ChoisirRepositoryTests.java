@@ -62,11 +62,6 @@ public class ChoisirRepositoryTests {
         Question question3 = new Question("Question 3");
         Question question4 = new Question("Question 4");
 
-        question1.setQuiz(defaultQuiz1);
-        question2.setQuiz(defaultQuiz1);
-        question3.setQuiz(defaultQuiz2);
-        question4.setQuiz(defaultQuiz2);
-
         questionRepository.save(question1);
         questionRepository.save(question2);
         questionRepository.save(question3);
