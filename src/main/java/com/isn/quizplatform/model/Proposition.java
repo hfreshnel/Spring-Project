@@ -50,10 +50,6 @@ public class Proposition {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
  
 
     @Override
