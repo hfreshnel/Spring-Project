@@ -21,15 +21,15 @@ public class Question {
     @JoinColumn(name = "question_id")
     private List<Proposition> propositions;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
-    private Quiz quiz;
-
-
     public Question() {
     }
 
     public Question(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Question(Long id, String libelle) {
+        this.id = id;
         this.libelle = libelle;
     }
 
@@ -67,14 +67,6 @@ public class Question {
             list.setLength(list.length() - 2);
         }
         return list.toString();
-    }
-    
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
     }
 
     @Override
