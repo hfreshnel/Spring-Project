@@ -17,7 +17,8 @@ public class QuestionService {
 	
 	public QuestionService() {
 	}
-    public List<Question> getAllQuestionsByQuizId(Long quizId) {
+	
+    public List<Question> getAllQuestions() {
         return questionimpl.findAll(); 
     }
 
