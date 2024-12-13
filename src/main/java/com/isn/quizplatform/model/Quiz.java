@@ -37,10 +37,9 @@ public class Quiz {
     // Constructeurs
     public Quiz() {}
 
-    public Quiz(Long id, String libelle, int etat, Timestamp dateDebutQuiz, 
+    public Quiz(String libelle, int etat, Timestamp dateDebutQuiz, 
                 int noQuestionCourante, int etape, Timestamp dateDebutQuestion, 
                 List<Question> questions) {
-        this.id = id;
         this.libelle = libelle;
         this.etat = etat;
         this.dateDebutQuiz = dateDebutQuiz;

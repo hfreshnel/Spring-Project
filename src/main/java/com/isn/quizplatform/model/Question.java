@@ -68,6 +68,14 @@ public class Question {
         }
         return list.toString();
     }
+    
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 
     @Override
     public String toString() {
@@ -78,5 +86,6 @@ public class Question {
                 + (propositions != null && !propositions.isEmpty() ? toStringPropositions() : "aucune proposition") +
                 "}}";
     }
+
 
 }
