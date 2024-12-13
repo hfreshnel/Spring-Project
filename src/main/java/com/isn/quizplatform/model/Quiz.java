@@ -49,6 +49,19 @@ public class Quiz {
         this.questions = questions;
     }
 
+    public Quiz(Long id, String libelle, int etat, Timestamp dateDebutQuiz, 
+                int noQuestionCourante, int etape, Timestamp dateDebutQuestion, 
+                List<Question> questions) {
+        this.id = id;
+        this.libelle = libelle;
+        this.etat = etat;
+        this.dateDebutQuiz = dateDebutQuiz;
+        this.noQuestionCourante = noQuestionCourante;
+        this.etape = etape;
+        this.dateDebutQuestion = dateDebutQuestion;
+        this.questions = questions;
+    }
+
     // Getters et Setters
     public Long getId() {
         return id;
