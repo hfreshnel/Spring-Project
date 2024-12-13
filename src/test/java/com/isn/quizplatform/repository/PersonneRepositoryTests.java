@@ -1,17 +1,16 @@
 package com.isn.quizplatform.repository;
 
-import com.isn.quizplatform.Application;
 import com.isn.quizplatform.model.Personne;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @ActiveProfiles("test")
-@DataJpaTest
+@SpringBootTest
 public class PersonneRepositoryTests {
 
     @Autowired
@@ -19,13 +18,10 @@ public class PersonneRepositoryTests {
 
     @Test
     public void testSavePersonne() {
-        // Given
         Personne personne = new Personne("Dupont", "Jean", "jean.dupont@example.com", "password123", 1);
 
-        // When
         Personne savedPersonne = personneRepository.save(personne);
 
-        // Then
         assertThat(savedPersonne).isNotNull();
         assertThat(savedPersonne.getId()).isGreaterThan(0);
         assertThat(savedPersonne.getNom()).isEqualTo("Dupont");
