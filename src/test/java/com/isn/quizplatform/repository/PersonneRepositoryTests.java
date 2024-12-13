@@ -32,7 +32,7 @@ public class PersonneRepositoryTests {
 
 
     @Test
-    public void testSaveFindByIdAndFindByMailPersonne() {
+    public void testSaveAndFindByMailPersonne() {
         // Given
         // When
         Personne foundPersonne1 = personneRepository.findByMail(defaultPersonne1.getMail()).orElse(null);
