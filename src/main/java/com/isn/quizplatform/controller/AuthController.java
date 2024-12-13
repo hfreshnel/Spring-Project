@@ -1,5 +1,6 @@
 package com.isn.quizplatform.controller;
 
+import com.isn.quizplatform.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,8 @@ public class AuthController {
 	private AuthService AS;
 	
 	@PostMapping("/public/auth/register")
-	public void register(@RequestBody Personne personne) {
-		AS.register(personne);
+	public ApiResponse<Personne> register(@RequestBody Personne personne) {
+		return AS.register(personne);
 	}
 	
 	@PostMapping("/public/auth/login")
