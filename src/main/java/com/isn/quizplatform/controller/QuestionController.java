@@ -36,7 +36,7 @@ public class QuestionController {
 	 */
 	 @GetMapping("/public/quiz/{quizId}/questions")
 	    public ResponseEntity<List<Question>> getAllQuestions(@PathVariable Long quizId) {
-	        List<Question> questions = questionService.getAllQuestionsByQuizId(quizId);
+	        List<Question> questions = questionService.getAllQuestions();
 	        return ResponseEntity.ok(questions);
 	    }
 	 
