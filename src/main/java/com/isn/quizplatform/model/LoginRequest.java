@@ -3,7 +3,7 @@ package com.isn.quizplatform.model;
 public class LoginRequest {
 
 	private String mail;
-    private String pwd;
+    private String mdp;
 
     public String getMail() {
         return mail;
@@ -13,11 +13,11 @@ public class LoginRequest {
         this.mail = mail;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getMdp() {
+        return mdp;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
     }
 }
