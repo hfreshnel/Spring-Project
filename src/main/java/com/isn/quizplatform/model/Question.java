@@ -18,13 +18,7 @@ public class Question {
     private String libelle;
 
     @OneToMany(fetch = FetchType.EAGER) 
-    @JoinColumn(name = "question_id")
     private List<Proposition> propositions;
-
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
-    private Quiz quiz;
-
 
     public Question() {
     }
