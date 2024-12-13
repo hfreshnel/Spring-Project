@@ -18,7 +18,6 @@ public class Question {
     private String libelle;
 
     @OneToMany(fetch = FetchType.EAGER) 
-    @JoinColumn(name = "question_id")
     private List<Proposition> propositions;
 
     public Question() {
