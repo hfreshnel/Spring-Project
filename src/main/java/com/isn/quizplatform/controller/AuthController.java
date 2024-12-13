@@ -28,7 +28,7 @@ public class AuthController {
 	
 	@PostMapping("/public/auth/login")
 	public Personne  login(@RequestBody LoginRequest loginrequest) {
-		return AS.login(loginrequest.getEmail(), loginrequest.getPassword());
+		return AS.login(loginrequest.getMail(), loginrequest.getMdp());
 	}
 
 }
