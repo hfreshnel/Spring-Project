@@ -1,5 +1,6 @@
 package com.isn.quizplatform.model;
 
+
 import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
@@ -85,4 +86,5 @@ public class Choisir {
     public String toString() {
         return "Choisir [id=" + id + ", personne=" + personne + ", quiz=" + quiz + ", heure=" + heure + "]";
     }
+
 }

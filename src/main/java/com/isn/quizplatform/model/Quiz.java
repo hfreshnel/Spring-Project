@@ -31,12 +31,7 @@ public class Quiz {
     @Column(name = "dateDebutQuestion")
     private Timestamp dateDebutQuestion;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "quiz_question",
-        joinColumns = @JoinColumn(name = "quiz_id"),
-        inverseJoinColumns = @JoinColumn(name = "question_id")
-    )
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
     // Constructeurs
