@@ -1,8 +1,13 @@
 package com.isn.quizplatform.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.isn.quizplatform.model.Personne;
+import java.util.Optional;
 
-public interface PersonneRepository extends JpaRepository<Personne, Long> {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.isn.quizplatform.model.*;
+
+public interface PersonneRepository extends JpaRepository<Personne, Long>{
+
+	Optional<Personne> findByMail(String email);
+
 }
+
