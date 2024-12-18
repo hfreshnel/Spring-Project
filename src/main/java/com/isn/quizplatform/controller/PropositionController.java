@@ -37,7 +37,7 @@ public class PropositionController {
 	@Autowired
 	private PropositionService propositionService;
 	
-	@GetMapping("/public/propositions/{id}")
+	@GetMapping("/public/proposition/{id}")
 	public ApiResponse<Proposition> getPropositionById(@PathVariable Long id) {
 		return propositionService.getPropositionById(id);
 	}
