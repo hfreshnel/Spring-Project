@@ -1,7 +1,6 @@
 package com.isn.quizplatform.repository;
 
 
-import com.isn.quizplatform.model.Personne;
 import com.isn.quizplatform.model.Proposition;
 
 import java.util.Optional;
