@@ -21,9 +21,10 @@ public class AuthService {
     private JwtUtils jwtUtils;
 
 	
-    public AuthService(PersonneRepository PR, BCryptPasswordEncoder passwordEncoder) {
+    public AuthService(PersonneRepository PR, BCryptPasswordEncoder passwordEncoder,JwtUtils jwtUtils) {
         this.PR = PR;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtils = jwtUtils;
     }
 
 	//Inscription un utilisateur
