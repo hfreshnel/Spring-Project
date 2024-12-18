@@ -37,8 +37,8 @@ public class QuestionController {
 	 * @param quizId
 	 * @return
 	 */
-	    @GetMapping("public/quiz/{quizId}/questions")
-	    public ResponseEntity<ApiResponse<List<Question>>> getAllQuestions(@PathVariable Long quizId) {
+	    @GetMapping("public/questions")
+	    public ResponseEntity<ApiResponse<List<Question>>> getAllQuestions() {
 	        ApiResponse<List<Question>> response = questionService.getAllQuestions();
 	        return ResponseEntity.status(response.getCode()).body(response);
 	    }
