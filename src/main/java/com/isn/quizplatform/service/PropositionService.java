@@ -67,6 +67,15 @@ public class PropositionService {
 			}
 	    }
 		
+	    public ApiResponse<Proposition> deleteProposition(Long id) {
+			try {
+				PR.deleteById(id);
+				return new ApiResponse<>(null,201,null);
+			}catch (RuntimeException e){
+				return new ApiResponse<>(null,500, "Delete faied !");
+			}
+
+	    }
 		
 
 	}

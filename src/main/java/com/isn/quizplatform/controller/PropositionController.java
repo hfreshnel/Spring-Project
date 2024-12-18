@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.isn.quizplatform.model.LoginRequest;
 import com.isn.quizplatform.model.Personne;
@@ -42,7 +43,7 @@ public class PropositionController {
 			}
 	
 	
-	@GetMapping("/public/proposition/{id}")
+	@GetMapping("/public/propositions/{id}")
 	public ApiResponse<Proposition> getPropositionById(@PathVariable Long id) {
 		return propositionService.getPropositionById(id);
 	}
@@ -54,12 +55,10 @@ public class PropositionController {
 		return propositionService.updateProposition(id, propositionInfo);
 	}
 	
-	/*
-	
-	@DeleteMapping("/delete")
-	public String delete(@PathVariable Long id) {
-		return propositionService.supprimer(id);
+	@DeleteMapping("/admin/propositions/{id}")
+	public ApiResponse<Proposition> deleteProposition(@PathVariable Long id){
+		return propositionService.deleteProposition(id);
+		
 	}
-	*/
 	
 }
