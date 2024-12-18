@@ -4,6 +4,8 @@ import com.isn.quizplatform.Application;
 import com.isn.quizplatform.model.Proposition;
 import com.isn.quizplatform.repository.PropositionRepository;
 
+import jakarta.transaction.Transactional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-@ActiveProfiles("test")
+@SpringBootTest
+@ActiveProfiles("test") // Utilise application-test.properties
 public class PropositionRepositoryTest {
 
     
@@ -37,13 +39,14 @@ public class PropositionRepositoryTest {
     @BeforeEach
     public void setup() {
         propositionRepository.deleteAll(); // Nettoie la table avant chaque test
-        defaultProposition1 = new Proposition(0, "test", 1L);
-        defaultProposition2 = new Proposition(1, "test2", 2L);
+        defaultProposition1 = new Proposition(0, "test", null);
+        defaultProposition2 = new Proposition(1, "test2", 10L);
 
         savedProposition = propositionRepository.save(defaultProposition1);
 
     }
     @Test
+    @Transactional
     public void testConstructorAndGetters() {
         // Arrange
         Long id = 1L;
@@ -60,6 +63,7 @@ public class PropositionRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void testSetters() {
         // Arrange
         Proposition proposition = new Proposition();
@@ -76,6 +80,7 @@ public class PropositionRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void testToString() {
         // Arrange
         Proposition proposition = new Proposition(1, "Test Libelle", 3L);
@@ -89,16 +94,18 @@ public class PropositionRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void testSaveProposition() {
 
         // Assert
-        assertNull(savedProposition.getId(), "L'ID par défaut devrait être null.");
+        assertEquals(savedProposition.getId(),1, "L'ID par défaut ne devrait pas être null après la sauvegarde.");
         assertEquals(0, savedProposition.getCorrect(), "La valeur correct par défaut devrait être 0.");
-        assertNull(savedProposition.getLibelle(), "Le libellé par défaut devrait être null.");
+        assertEquals("test", savedProposition.getLibelle(), "Le libellé par défaut devrait être null.");
     }
 
 
     @Test
+    @Transactional
     public void testFindPropositionByIdAndLibelle() {
         //Arrange
         Proposition foundProposition1 = propositionRepository.findById(defaultProposition1.getId()).orElse(null);
