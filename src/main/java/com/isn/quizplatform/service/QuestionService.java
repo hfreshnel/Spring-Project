@@ -25,7 +25,7 @@ public class QuestionService {
             List<Question> questions = questionRepository.findAll();
             return new ApiResponse<>(questions, 200, null); 
         } catch (Exception e) {
-            return new ApiResponse<>(null, 500, "Failed"); 
+            return new ApiResponse<>(null, 500, "question.failed"); 
         }
     }
 
