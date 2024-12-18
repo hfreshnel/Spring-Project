@@ -18,7 +18,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/auth/register", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**","/public/quiz/**", "/v3/api-docs/**")
+
+                        .requestMatchers("/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**", "/v3/api-docs/**")
+
                         .permitAll()
                         .anyRequest().authenticated()
                 )
