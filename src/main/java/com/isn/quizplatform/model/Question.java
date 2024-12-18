@@ -17,7 +17,8 @@ public class Question {
     @Column(name = "libelle")
     private String libelle;
 
-    @OneToMany(fetch = FetchType.EAGER) 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "questionId")
     private List<Proposition> propositions;
 
     public Question() {

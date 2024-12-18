@@ -19,23 +19,23 @@ public class Quiz {
     @Column(name = "etat", nullable = false)
     private int etat;
 
-    @Column(name = "dateDebutQuiz") 
+    @Column(name = "dateDebutQuiz" , nullable = false) 
     private Timestamp dateDebutQuiz;
 
-    @Column(name = "numeroQuestionCourante")
+    @Column(name = "numeroQuestionCourante", nullable = false)
     private int noQuestionCourante;
 
-    @Column(name = "etape")
+    @Column(name = "etape", nullable = false)
     private int etape;
 
-    @Column(name = "dateDebutQuestion")
+    @Column(name = "dateDebutQuestion", nullable = false)
     private Timestamp dateDebutQuestion;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "quiz_question",
-        joinColumns = @JoinColumn(name = "quiz_id"),
-        inverseJoinColumns = @JoinColumn(name = "question_id")
+        joinColumns = @JoinColumn(name = "id_quiz"),
+        inverseJoinColumns = @JoinColumn(name = "id_question")
     )
     private List<Question> questions;
 
