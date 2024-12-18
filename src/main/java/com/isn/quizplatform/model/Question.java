@@ -18,7 +18,6 @@ public class Question {
     private String libelle;
 
     @OneToMany(fetch = FetchType.EAGER) 
-    @JoinColumn(name = "question_id")
     private List<Proposition> propositions;
 
     public Question() {
@@ -26,6 +25,16 @@ public class Question {
 
     public Question(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Question(Long id, String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
+
+    public Question(String libelle, List<Proposition> propositions) {
+        this.libelle = libelle;
+        this.propositions = propositions;
     }
 
     public Long getId() {
@@ -73,5 +82,6 @@ public class Question {
                 + (propositions != null && !propositions.isEmpty() ? toStringPropositions() : "aucune proposition") +
                 "}}";
     }
+
 
 }

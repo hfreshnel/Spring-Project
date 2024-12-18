@@ -1,10 +1,10 @@
-package com.isn.quizplatform.quizplatform;
+package com.isn.quizplatform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuizplatformApplicationTests {
+class QuizplatformApplicationTest {
 
 	@Test
 	void contextLoads() {

@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "personne")
 public class Personne {
 
     @Id
@@ -32,6 +34,15 @@ public class Personne {
     }
 
     public Personne(String nom, String prenom, String mail, String mdp, int role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.mdp = mdp;
+        this.role = role;
+    }
+
+    public Personne(Long id, String nom, String prenom, String mail, String mdp, int role) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;

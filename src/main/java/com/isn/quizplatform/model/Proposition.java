@@ -6,6 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 @Entity
 public class Proposition {
     @Id
@@ -17,7 +22,8 @@ public class Proposition {
 
     @Column(name = "libelle")
     private String libelle;
-    
+
+
     public Proposition(){}
 
     public Proposition (int correct, String libelle, Long id)
