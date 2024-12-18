@@ -19,7 +19,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers("/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**","/public/quiz/**", "/admin/**", "/v3/api-docs/**")
+
+                        .requestMatchers("public/questions/**","public/questions","/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**","/public/quiz/**", "/admin/**", "/v3/api-docs/**")
+
 
                         .permitAll()
                         .anyRequest().authenticated()
