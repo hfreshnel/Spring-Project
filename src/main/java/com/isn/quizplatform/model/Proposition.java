@@ -19,32 +19,15 @@ public class Proposition {
     @Column(name = "libelle")
     private String libelle;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    private Question question;
-
 
     public Proposition(){}
 
-    public Proposition (int correct, String libelle)
+    public Proposition (int correct, String libelle, Long id)
     {   
-        this.correct = correct;
-        this.libelle = libelle;
-    }
-
-    public Proposition (Long id, int correct, String libelle)
-    {   
-        this.id = id;
+        super();
         this.correct = correct;
         this.libelle = libelle;
         this.id = id;
-    }
-
-    public Proposition (int correct, String libelle, Question question)
-    {   
-        this.correct = correct;
-        this.libelle = libelle;
-        this.question = question;
     }
 
     public int getCorrect() {
