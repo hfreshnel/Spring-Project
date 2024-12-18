@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers("/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**", "/v3/api-docs/**")
+                        .requestMatchers("/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**","/public/quiz/**", "/admin/**", "/v3/api-docs/**")
 
                         .permitAll()
                         .anyRequest().authenticated()
@@ -27,6 +27,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable());
 
-        return http.build();
+    return http.build();
     }
 }
