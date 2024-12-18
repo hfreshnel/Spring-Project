@@ -54,10 +54,19 @@ public class PersonneService {
     	personne.setNom(personneInfo.getNom());
 		personne.setPrenom(personneInfo.getPrenom());
 
-		String hashedPassword = passwordEncoder.encode(personneInfo.getMdp());
-		personne.setMdp(hashedPassword);
+		if(personneInfo.getMdp().length() < 6){
+            throw new RuntimeException("person.mdp_form_wrong");
+		}else {
+			String hashedPassword = passwordEncoder.encode(personneInfo.getMdp());
+			personne.setMdp(hashedPassword);
+		}
 
-		personne.setMail(personneInfo.getMail());
+		String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+		if(!personneInfo.getMail().matches(emailRegex)){
+			return new ApiResponse<>(null, 404, "person.email_from_wrong");
+		}else {
+			personne.setMail(personneInfo.getMail());
+		}
 
         PR.save(personne);
 		return new ApiResponse<>(personne,200,null);
