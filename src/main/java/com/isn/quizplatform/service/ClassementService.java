@@ -19,10 +19,10 @@ public class ClassementService {
         return jdbcTemplate.queryForList(sql, quizID);
     }
     
-    public List<Map<String, Object>> getPropositionsPercentage(Long questionID) {
+    public List<Map<String, Object>> getPropositionsPercentage(Long questionID, Long quizID) {
         // Appel de la procédure stockée
-        System.out.println("Calling GetPropositionsPercentage with questionID: " + questionID);
-        String sql = "CALL GetPropositionsPercentage(?)";
-        return jdbcTemplate.queryForList(sql, questionID);
+        System.out.println("Calling GetPropositionsPercentage with questionID: " + questionID + " and quizID: " + quizID);
+        String sql = "CALL GetPropositionsPercentage(?, ?)";
+        return jdbcTemplate.queryForList(sql, questionID, quizID);
     }
 }
