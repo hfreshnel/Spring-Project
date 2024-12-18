@@ -1,8 +1,12 @@
 package com.isn.quizplatform.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.isn.quizplatform.model.Question;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.isn.quizplatform.model.*;
+
+ 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    
+	//List<Question> findQuizByid(Long Quizid);
 }
