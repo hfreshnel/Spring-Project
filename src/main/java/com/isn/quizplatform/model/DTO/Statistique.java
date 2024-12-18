@@ -1,65 +1,74 @@
 package com.isn.quizplatform.model.DTO;
 
 public class Statistique {
-    private Long personId;
-    private Long correctAnswers;
-    private Long totalResponseTime;
-    private Long ranking;
+    private Long QuizID;
+    private Long QuestionID;
+    private Long PropositionID;
+    private Long ChoicesForProposition;
+    private Long Percentage;
 
-    public Statistique(){        
+    public Statistique() {
     }
 
-    public Statistique(Long personId, Long correctAnswers, Long totalResponseTime, Long ranking){
-        this.personId = personId;
-        this.correctAnswers = correctAnswers;
-        this.totalResponseTime = totalResponseTime;
-        this.ranking = ranking;
+    public Statistique(Long ChoicesForProposition, Long Percentage, Long PropositionID, Long QuestionID, Long QuizID) {
+        this.ChoicesForProposition = ChoicesForProposition;
+        this.Percentage = Percentage;
+        this.PropositionID = PropositionID;
+        this.QuestionID = QuestionID;
+        this.QuizID = QuizID;
     }
 
-    public Long getPersonId() {
-        return personId;
+    public Long getQuizID() {
+        return QuizID;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setQuizID(Long quizID) {
+        QuizID = quizID;
     }
 
-    public Long getCorrectAnswers() {
-        return correctAnswers;
+    public Long getQuestionID() {
+        return QuestionID;
     }
 
-    public void setCorrectAnswers(Long correctAnswers) {
-        this.correctAnswers = correctAnswers;
+    public void setQuestionID(Long questionID) {
+        QuestionID = questionID;
     }
 
-    public Long getTotalResponseTime() {
-        return totalResponseTime;
+    public Long getPropositionID() {
+        return PropositionID;
     }
 
-    public void setTotalResponseTime(Long totalResponseTime) {
-        this.totalResponseTime = totalResponseTime;
+    public void setPropositionID(Long propositionID) {
+        PropositionID = propositionID;
     }
 
-    public Long getRanking() {
-        return ranking;
+    public Long getChoicesForProposition() {
+        return ChoicesForProposition;
     }
 
-    public void setRanking(Long ranking) {
-        this.ranking = ranking;
+    public void setChoicesForProposition(Long choicesForProposition) {
+        ChoicesForProposition = choicesForProposition;
+    }
+
+    public Long getPercentage() {
+        return Percentage;
+    }
+
+    public void setPercentage(Long percentage) {
+        Percentage = percentage;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Statistique{");
-        sb.append("personId=").append(personId);
-        sb.append(", correctAnswers=").append(correctAnswers);
-        sb.append(", totalResponseTime=").append(totalResponseTime);
-        sb.append(", ranking=").append(ranking);
+        sb.append("QuizID=").append(QuizID);
+        sb.append(", QuestionID=").append(QuestionID);
+        sb.append(", PropositionID=").append(PropositionID);
+        sb.append(", ChoicesForProposition=").append(ChoicesForProposition);
+        sb.append(", Percentage=").append(Percentage);
         sb.append('}');
         return sb.toString();
     }
-    
-
 }
 
