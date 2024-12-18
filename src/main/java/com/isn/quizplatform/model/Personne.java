@@ -41,6 +41,15 @@ public class Personne {
         this.role = role;
     }
 
+    public Personne(Long id, String nom, String prenom, String mail, String mdp, int role) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.mdp = mdp;
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }

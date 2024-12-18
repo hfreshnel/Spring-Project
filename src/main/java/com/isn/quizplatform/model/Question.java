@@ -27,6 +27,16 @@ public class Question {
         this.libelle = libelle;
     }
 
+    public Question(Long id, String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
+
+    public Question(String libelle, List<Proposition> propositions) {
+        this.libelle = libelle;
+        this.propositions = propositions;
+    }
+
     public Long getId() {
         return id;
     }
@@ -72,5 +82,6 @@ public class Question {
                 + (propositions != null && !propositions.isEmpty() ? toStringPropositions() : "aucune proposition") +
                 "}}";
     }
+
 
 }
