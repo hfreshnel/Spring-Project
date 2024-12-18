@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers("/public/auth/register","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**", "/v3/api-docs/**")
+                        .requestMatchers("/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**", "/v3/api-docs/**")
 
                         .permitAll()
                         .anyRequest().authenticated()
