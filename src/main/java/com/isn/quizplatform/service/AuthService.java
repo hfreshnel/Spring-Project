@@ -53,7 +53,7 @@ public class AuthService {
 					.orElseThrow(() -> new RuntimeException("auth.invalid_credentials"));
 
 			if (!passwordEncoder.matches(password, personne.getMdp())) {
-				throw new RuntimeException("E-mail ou mot de passe invalid");
+				throw new RuntimeException("auth.invalid_password");
 			}
 
 			System.out.println("Utilisateur connecté avec succès : " + personne.getMail());
