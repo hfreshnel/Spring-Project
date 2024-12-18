@@ -1,6 +1,8 @@
 package com.isn.quizplatform.controller;
 
 import com.isn.quizplatform.model.ApiResponse;
+import com.isn.quizplatform.model.AuthResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +30,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/public/auth/login")
-	public ApiResponse<Personne> login(@RequestBody LoginRequest loginrequest) {
+	public ApiResponse<AuthResponse> login(@RequestBody LoginRequest loginrequest) {
 		return AS.login(loginrequest.getMail(), loginrequest.getMdp());
 	}
 
