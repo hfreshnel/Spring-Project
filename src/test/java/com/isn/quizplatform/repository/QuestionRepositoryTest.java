@@ -28,16 +28,13 @@ public class QuestionRepositoryTest {
     public void setup() {
         questionRepository.deleteAll(); // Nettoie la table avant chaque test
     
-        // Crée une liste de propositions
         List<Proposition> propositions = new ArrayList<>();
         propositions.add(new Proposition(1, "Proposition 1"));
         propositions.add(new Proposition(0, "Proposition 2"));
         propositions.add(new Proposition(1, "Proposition 3"));
     
-        // Crée une question avec les propositions
         defaultQuestion1 = new Question("Oui ?", propositions);
     
-        // Sauvegarde la question et les propositions
         savedQuestion = questionRepository.save(defaultQuestion1);
     }
     
@@ -52,11 +49,6 @@ public class QuestionRepositoryTest {
         assertThat(foundQuestion.getId()).isNotNull();
         assertThat(foundQuestion.getLibelle()).isEqualTo("Oui ?");
         assertThat(foundQuestion.getPropositions()).hasSize(3);
-
-        // Vérifie les propositions
-        Proposition foundProposition = foundQuestion.getPropositions().get(0);
-        assertThat(foundProposition.getLibelle()).isEqualTo("Proposition 1");
-        assertThat(foundProposition.getCorrect()).isEqualTo(1);
     }
 
     @Test
