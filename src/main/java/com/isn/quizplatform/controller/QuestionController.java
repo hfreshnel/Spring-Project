@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,27 +18,29 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.isn.quizplatform.model.*;
 import com.isn.quizplatform.service.QuestionService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @EnableWebMvc
-@RequestMapping("/Question")
+@RequestMapping("/")
 public class QuestionController {
 	
-	 @Autowired
-	    private QuestionService questionService;
+	 private final QuestionService questionService;
+	 
+	    public QuestionController(QuestionService questionService) {
+	        this.questionService = questionService;
+	    }
 	
-	public QuestionController() {
-		
-}
+
 	
 	/**
 	 * 	Méthode permettant de recupérer toutes les questions pour un Quiz donné
 	 * @param quizId
 	 * @return
 	 */
-	 @GetMapping("/public/quiz/{quizId}/questions")
-	    public ResponseEntity<List<Question>> getAllQuestions(@PathVariable Long quizId) {
-	        List<Question> questions = questionService.getAllQuestions();
-	        return ResponseEntity.ok(questions);
+	    @GetMapping("public/quiz/{quizId}/questions")
+	    public ResponseEntity<ApiResponse<List<Question>>> getAllQuestions(@PathVariable Long quizId) {
+	        ApiResponse<List<Question>> response = questionService.getAllQuestions();
+	        return ResponseEntity.status(response.getCode()).body(response);
 	    }
 	 
 	 /***
@@ -45,10 +48,10 @@ public class QuestionController {
 	  * @param questionId
 	  * @return
 	  */
-	 @GetMapping("/public/questions/{questionId}")
-	    public ResponseEntity<Question> getQuestionById(@PathVariable Long questionId) {
-	        Optional<Question> questionOptional = questionService.getQuestionById(questionId);
-	        return questionOptional.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+	    @GetMapping("public/questions/{questionId}")
+	    public ResponseEntity<ApiResponse<Question>> getQuestionById(@PathVariable Long questionId) {
+	        ApiResponse<Question> response = questionService.getQuestionById(questionId);
+	        return ResponseEntity.status(response.getCode()).body(response);
 	    }
 	 
 	 /**
@@ -56,10 +59,10 @@ public class QuestionController {
 	  * @param newQuestion
 	  * @return
 	  */
-	 @PostMapping("/admin/questions")
-	    public ResponseEntity<Question> createQuestion(@RequestBody Question newQuestion) {
-	        Question createdQuestion = questionService.createQuestion(newQuestion);
-	        return ResponseEntity.ok(createdQuestion);
+	    @PostMapping("admin/questions")
+	    public ResponseEntity<ApiResponse<Question>> createQuestion(@RequestBody Question newQuestion) {
+	        ApiResponse<Question> response = questionService.createQuestion(newQuestion);
+	        return ResponseEntity.status(response.getCode()).body(response);
 	    }
 
 	 
@@ -69,28 +72,23 @@ public class QuestionController {
 	  * @param updatedQuestion
 	  * @return
 	  */
-	 @PutMapping("/admin/questions/{questionId}")
-	 public ResponseEntity<Question> updateQuestion(
-	         @PathVariable Long questionId, @RequestBody Question updatedQuestion) {
-	     updatedQuestion.setId(questionId);
-	     try {
-	         Question updated = questionService.updateQuestion(updatedQuestion);
-	         return ResponseEntity.ok(updated);
-	     } catch (RuntimeException e) {
-	         return ResponseEntity.notFound().build();
-	     }
-	 }
+	    @PutMapping("admin/questions/{questionId}")
+	    public ResponseEntity<ApiResponse<Question>> updateQuestion(
+	            @PathVariable Long questionId, @RequestBody Question updatedQuestion) {
+	        updatedQuestion.setId(questionId);
+	        ApiResponse<Question> response = questionService.updateQuestion(updatedQuestion);
+	        return ResponseEntity.status(response.getCode()).body(response);
+	    }
 
 	 /**
 	  * Méthode permettant de supprimer une question
 	  * @param questionId
 	  * @return
 	  */
-	 @DeleteMapping("/admin/questions/{questionId}")
-	    public ResponseEntity<Void> deleteQuestion(@PathVariable Long questionId) {
-	        boolean deleted = questionService.deleteQuestion(questionId);
-	        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+	    @DeleteMapping("admin/questions/{questionId}")
+	    public ResponseEntity<ApiResponse<Boolean>> deleteQuestion(@PathVariable Long questionId) {
+	        ApiResponse<Boolean> response = questionService.deleteQuestion(questionId);
+	        return ResponseEntity.status(response.getCode()).body(response);
 	    }
-	
 
 }
