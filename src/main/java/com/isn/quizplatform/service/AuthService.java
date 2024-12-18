@@ -24,10 +24,14 @@ public class AuthService {
 
 	//Inscription un utilisateur
 	public ApiResponse<Personne> register(Personne personne) {
-			if(PR.findByMail(personne.getMail()).isPresent()){
+		String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+			if(!personne.getMail().matches(emailRegex)){ //check from of email
+				return new ApiResponse<>(null, 404, "auth.email_from_wrong");
+			}
+			if(PR.findByMail(personne.getMail()).isPresent()){ // check the email is? exits
 				return new ApiResponse<>(null, 404, "auth.user_already_exists");
 			}
-			if(personne.getMdp().length() < 6){
+			if(personne.getMdp().length() < 6){ // check the length of mdp
 				return new ApiResponse<>(null, 404, "auth.mdp_form_wrong");
 			}else {
 				String hashedPassword = passwordEncoder.encode(personne.getMdp());
