@@ -1,14 +1,11 @@
 package com.isn.quizplatform.service;
 
 import com.isn.quizplatform.model.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isn.quizplatform.model.Personne;
 import com.isn.quizplatform.repository.PersonneRepository;
-
-import jakarta.servlet.http.HttpSession;
 
 @Service
 public class AuthService {
