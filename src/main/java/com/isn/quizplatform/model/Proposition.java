@@ -30,6 +30,12 @@ public class Proposition {
         this.id = id;
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
+    public Proposition (int correct, String libelle)
+    {   
+        this.correct = correct;
+        this.libelle = libelle;
+    }
+
     public int getCorrect() {
         return correct;
     }
