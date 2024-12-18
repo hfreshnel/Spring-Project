@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.isn.quizplatform.model.Proposition;
 
+
 public interface PropositionRepository extends JpaRepository<Proposition, Long> {
-    
+	
+
 }
+
