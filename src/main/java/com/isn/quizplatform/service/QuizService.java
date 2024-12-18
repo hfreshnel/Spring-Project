@@ -1,5 +1,6 @@
 package com.isn.quizplatform.service;
 
+import com.isn.quizplatform.model.Question;
 import com.isn.quizplatform.model.ApiResponse;
 import com.isn.quizplatform.model.Quiz;
 import com.isn.quizplatform.repository.QuizRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class QuizService {
@@ -82,6 +84,21 @@ public class QuizService {
             }
         } catch (Exception e) {
             return new ApiResponse<>(false, 500, "Erreur lors de la suppression du quiz.");
+        }
+    }
+
+    public ApiResponse<List<Long>> getQuestionIdsByQuizId(Long id) {
+        try {
+            return quizRepository.findById(id)
+                .map(quiz -> {
+                    List<Long> questionIds = quiz.getQuestions().stream()
+                            .map(Question::getId)
+                            .collect(Collectors.toList());
+                    return new ApiResponse<>(questionIds, 200, "Success");
+                })
+                .orElseGet(() -> new ApiResponse<>(null, 404, "Quiz not found."));
+        } catch (Exception e) {
+            return new ApiResponse<>(null, 500, "Erreur lors de la récupération des ids");
         }
     }
 }

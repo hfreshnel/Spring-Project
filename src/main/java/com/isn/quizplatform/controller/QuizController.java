@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/public/quiz")
@@ -30,6 +31,13 @@ public class QuizController {
         ApiResponse<Quiz> response = quizService.getQuizById(id);
         return ResponseEntity.status(response.getCode()).body(response);
     }
+
+    @GetMapping("/{id}/questionIds")
+    public ResponseEntity<ApiResponse<List<Long>>> getMethodName(@PathVariable Long id) {
+        ApiResponse<List<Long>> response = quizService.getQuestionIdsByQuizId(id);
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+    
 
     // Créer un nouveau quiz
     @PostMapping
