@@ -27,9 +27,12 @@ public class AuthService {
 			if(PR.findByMail(personne.getMail()).isPresent()){
 				return new ApiResponse<>(null, 404, "auth.user_already_exists");
 			}
-			String hashedPassword = passwordEncoder.encode(personne.getMdp());
-			personne.setMdp(hashedPassword);
-
+			if(personne.getMdp().length() < 6){
+				return new ApiResponse<>(null, 404, "auth.mdp_form_wrong");
+			}else {
+				String hashedPassword = passwordEncoder.encode(personne.getMdp());
+				personne.setMdp(hashedPassword);
+			}
 			personne.setRole(0);
 		try {
 			PR.save(personne);
