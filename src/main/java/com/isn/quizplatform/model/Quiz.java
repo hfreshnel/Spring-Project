@@ -34,8 +34,8 @@ public class Quiz {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
         name = "quiz_question",
-        joinColumns = @JoinColumn(name = "quiz_id"),
-        inverseJoinColumns = @JoinColumn(name = "question_id")
+        joinColumns = @JoinColumn(name = "id_quiz"),
+        inverseJoinColumns = @JoinColumn(name = "id_question")
     )
     private List<Question> questions;
 

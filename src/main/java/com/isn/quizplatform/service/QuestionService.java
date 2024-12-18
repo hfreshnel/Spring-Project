@@ -35,10 +35,10 @@ public class QuestionService {
             if (question.isPresent()) {
                 return new ApiResponse<>(question.get(), 200, null); 
             } else {
-                return new ApiResponse<>(null, 404, "Question non trouvé"); 
+                return new ApiResponse<>(null, 404, "question.not_found"); 
             }
         } catch (Exception e) {
-            return new ApiResponse<>(null, 500, "Failed"); 
+            return new ApiResponse<>(null, 500, "question.failed"); 
         }
     }
 
