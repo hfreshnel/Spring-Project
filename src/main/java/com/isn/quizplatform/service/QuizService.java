@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class QuizService {
@@ -93,6 +94,22 @@ public class QuizService {
         }
     }
 
+    //Récupérer la liste des ids de question d'un quiz
+    public ApiResponse<List<Long>> getQuestionIdsByQuizId(Long id) {
+        try {
+            return quizRepository.findById(id)
+                .map(quiz -> {
+                    List<Long> questionIds = quiz.getQuestions().stream()
+                            .map(Question::getId)
+                            .collect(Collectors.toList());
+                    return new ApiResponse<>(questionIds, 200, "Success");
+                })
+                .orElseGet(() -> new ApiResponse<>(null, 404, "Quiz not found."));
+        } catch (Exception e) {
+            return new ApiResponse<>(null, 500, "Erreur lors de la récupération des ids");
+        }
+    }
+
     // Ajouter question à un quiz
     public ApiResponse<Quiz> addQuestionToQuiz(Long quizId, Long questionId) {
         ApiResponse<Quiz> response = new ApiResponse<>();
@@ -130,6 +147,4 @@ public class QuizService {
             return response;
         }
     }
-
-    
 }
