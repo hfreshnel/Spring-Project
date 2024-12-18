@@ -51,6 +51,17 @@ public class QuizController {
         ApiResponse<Boolean> response = quizService.deleteQuiz(id);
         return ResponseEntity.status(response.getCode()).body(response);
     }
+    // Associer des questions à un quiz
+    @PostMapping("/{quizId}/question/{questionId}")
+    public ResponseEntity<ApiResponse<Quiz>> addQuestionToQuiz(
+            @PathVariable Long quizId,
+            @PathVariable Long questionId) {
+
+        ApiResponse<Quiz> response = quizService.addQuestionToQuiz(quizId, questionId);
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+
+
 }
    
 
