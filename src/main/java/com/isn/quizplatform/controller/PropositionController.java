@@ -32,17 +32,18 @@ public class PropositionController {
 	@Autowired
 	private PropositionService propositionService;
 	
-	@PostMapping("/public/proposition/create")
+	@PostMapping("/admin/proposition/create/{questionId}")
 	public ApiResponse<Proposition> create(@RequestBody Proposition proposition) {
 		return propositionService.create(proposition);
-		
+			}
+	/*
+	
+	@GetMapping
+	public List<Proposition> read(){
+		return propositionService.read();
 	}
 	
 	/*
-	@GetMapping
-	public List<Proposition> read(){
-		return propositionService.lire();
-	}
 	
 	@PutMapping("/update/{id}")
 	public Proposition update(@PathVariable Long id, @RequestBody Proposition proposition) {

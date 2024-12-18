@@ -31,7 +31,7 @@ public class PropositionService {
 		public ApiResponse<Proposition> create(Proposition proposition) {
 			try {
 				
-				return new ApiResponse<>(proposition, 201, null); // Succès, utilisateur créé
+				return new ApiResponse<>(proposition, 200, null); // Succès, utilisateur créé
 			} catch (Exception e) {
 				return new ApiResponse<>(null, 500, "creation.failed"); // Erreur interne
 			}
