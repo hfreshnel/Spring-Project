@@ -17,13 +17,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/auth/register", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**","/public/quiz/**", "/v3/api-docs/**")
-                        .permitAll()
-                        .anyRequest().authenticated()
-                )
-                .csrf(csrf -> csrf.disable());
+            .authorizeHttpRequests(auth -> auth
+            // Endpoints accessibles au public
+            .requestMatchers(
+                    "/public/auth/register", 
+                    "/public/auth/login", 
+                    "/public/personnes/{id}", 
+                    "/public/quiz/**",  // Public pour les quiz
+                    "/swagger-ui/**", 
+                    "/v3/api-docs/**", "/admin/quiz/**", "/admin/**"
+            ).permitAll()
+            
+            
+            // Toute autre requête nécessite une authentification
+            .anyRequest().authenticated()
+    )
+    .csrf(csrf -> csrf.disable());
 
-        return http.build();
+    return http.build();
     }
 }
