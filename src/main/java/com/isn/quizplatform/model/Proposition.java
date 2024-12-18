@@ -1,7 +1,6 @@
 package com.isn.quizplatform.model;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +27,12 @@ public class Proposition {
         this.correct = correct;
         this.libelle = libelle;
         this.id = id;
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+    public Proposition (int correct, String libelle)
+    {   
+        this.correct = correct;
+        this.libelle = libelle;
     }
 
     public int getCorrect() {
@@ -54,11 +59,10 @@ public class Proposition {
         this.id = id;
     }
 
- 
-
     @Override
     public String toString() {
         return "Proposition [correct=" + correct + ", libelle=" + libelle + ", id=" + id  + "]";
     }
     
+
 }

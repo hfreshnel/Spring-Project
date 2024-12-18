@@ -1,7 +1,9 @@
 package com.isn.quizplatform.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.isn.quizplatform.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,31 +24,66 @@ public class PersonneService {
 	}
 
 	//Get all users
-	public List<Personne> getAllPersonne(){
-		return PR.findAll();
+	public ApiResponse<List<Personne>> getAllPersonne(){
+		try {
+			return new ApiResponse<>(PR.findAll(),200,null);
+		}catch (RuntimeException e){
+			return new ApiResponse<>(null, 500, "person.get_failed");
+		}
 	}
 
 	//Get a user by userid
-	public Personne getPersonneById(Long id) {
-		return PR.findById(id).orElse(new Personne());
+	public ApiResponse<Personne> getPersonneById(Long id) {
+		try{
+			Optional<Personne> personne = PR.findById(id);
+			if(personne.isPresent()){
+				return new ApiResponse<>(personne.get(),200,null);
+			}else {
+				return new ApiResponse<>(null,404,"person.get_id_failed");
+			}
+		}catch (Exception e){
+			return new ApiResponse<>(null,500,"person.get_failed");
+		}
 	}
 
 	//Update the info insert by userid
-    public Personne updatePersonne(Long id, Personne personneInfo) {
-    	Personne personne = getPersonneById(id);
+    public ApiResponse<Personne> updatePersonne(Long id, Personne personneInfo) {
+		try{
+    	Personne personne = PR.findById(id).orElseThrow(() -> new RuntimeException("person.get_id_failed"));
     	personne.setNom(personneInfo.getNom());
-    	personne.setMail(personneInfo.getMail());
 		personne.setPrenom(personneInfo.getPrenom());
 
-		String hashedPassword = passwordEncoder.encode(personne.getMdp());
-		personne.setMdp(hashedPassword);
+		if(personneInfo.getMdp().length() < 6){
+            throw new RuntimeException("person.mdp_form_wrong");
+		}else {
+			String hashedPassword = passwordEncoder.encode(personneInfo.getMdp());
+			personne.setMdp(hashedPassword);
+		}
 
-        return PR.save(personne);
+		String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+		if(!personneInfo.getMail().matches(emailRegex)){
+			return new ApiResponse<>(null, 404, "person.email_from_wrong");
+		}else {
+			personne.setMail(personneInfo.getMail());
+		}
+
+        PR.save(personne);
+		return new ApiResponse<>(personne,200,null);
+		}catch (RuntimeException e){
+			return new ApiResponse<>(null,404,e.getMessage());
+		}
     }
 
 	//Delete user by userid
-    public void deletePersonne(Long id) {
-    	PR.deleteById(id);
+    public ApiResponse<Personne> deletePersonne(Long id) {
+		try {
+			PR.findById(id).orElseThrow(() -> new RuntimeException("person.get_id_failed"));
+			PR.deleteById(id);
+			return new ApiResponse<>(null,200,null);
+		}catch (RuntimeException e){
+			return new ApiResponse<>(null,404, e.getMessage());
+		}
+
     }
  
 }

@@ -8,6 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.isn.quizplatform.model.Choisir;
 import com.isn.quizplatform.model.Personne;
+import com.isn.quizplatform.model.Proposition;
 import com.isn.quizplatform.model.Question;
 import com.isn.quizplatform.model.Quiz;
 
@@ -21,7 +22,7 @@ import java.util.List;
 
 @SpringBootTest
 @ActiveProfiles("test") // Utilise application-test.properties
-public class ChoisirRepositoryTests {
+public class ChoisirRepositoryTest {
 
     @Autowired
     private ChoisirRepository choisirRepository;
@@ -46,6 +47,9 @@ public class ChoisirRepositoryTests {
 
     private Choisir defaultChoisir1;
     private Choisir defaultChoisir2;
+
+    private Proposition defaultProposition1;
+    private Proposition defaultProposition2;
 
     @BeforeEach
     public void setup() {
@@ -79,8 +83,11 @@ public class ChoisirRepositoryTests {
         defaultPersonne1 = personneRepository.save(defaultPersonne1);
         defaultPersonne2 = personneRepository.save(defaultPersonne2);
 
-        defaultChoisir1 = new Choisir(defaultPersonne1, defaultQuiz1, new Timestamp(System.currentTimeMillis()));
-        defaultChoisir2 = new Choisir(defaultPersonne2, defaultQuiz2, new Timestamp(System.currentTimeMillis()));
+        defaultProposition1 = new Proposition(0, "Proposition 1", null);
+        defaultProposition2 = new Proposition(1, "Proposition 2", null);
+
+        defaultChoisir1 = new Choisir(defaultPersonne1, defaultQuiz1, defaultProposition1 ,new Timestamp(System.currentTimeMillis()));
+        defaultChoisir2 = new Choisir(defaultPersonne2, defaultQuiz2, defaultProposition2, new Timestamp(System.currentTimeMillis()));
 
         defaultChoisir1 = choisirRepository.save(defaultChoisir1);
         defaultChoisir2 = choisirRepository.save(defaultChoisir2);
