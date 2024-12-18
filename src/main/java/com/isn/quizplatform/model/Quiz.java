@@ -42,6 +42,18 @@ public class Quiz {
     // Constructeurs
     public Quiz() {}
 
+    public Quiz(String libelle, int etat, Timestamp dateDebutQuiz, 
+                int noQuestionCourante, int etape, Timestamp dateDebutQuestion, 
+                List<Question> questions) {
+        this.libelle = libelle;
+        this.etat = etat;
+        this.dateDebutQuiz = dateDebutQuiz;
+        this.noQuestionCourante = noQuestionCourante;
+        this.etape = etape;
+        this.dateDebutQuestion = dateDebutQuestion;
+        this.questions = questions;
+    }
+
     public Quiz(Long id, String libelle, int etat, Timestamp dateDebutQuiz, 
                 int noQuestionCourante, int etape, Timestamp dateDebutQuestion, 
                 List<Question> questions) {
@@ -53,6 +65,16 @@ public class Quiz {
         this.etape = etape;
         this.dateDebutQuestion = dateDebutQuestion;
         this.questions = questions;
+    }
+
+    public Quiz(String libelle, int etat, Timestamp dateDebutQuiz, 
+                int noQuestionCourante, int etape, Timestamp dateDebutQuestion) {
+        this.libelle = libelle;
+        this.etat = etat;
+        this.dateDebutQuiz = dateDebutQuiz;
+        this.noQuestionCourante = noQuestionCourante;
+        this.etape = etape;
+        this.dateDebutQuestion = dateDebutQuestion;
     }
 
     // Getters et Setters
