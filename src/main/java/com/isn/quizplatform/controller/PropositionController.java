@@ -37,12 +37,6 @@ public class PropositionController {
 	@Autowired
 	private PropositionService propositionService;
 	
-	@PostMapping("/admin/proposition/create")
-	public ApiResponse<Proposition> create(@RequestBody Proposition proposition) {
-		return propositionService.create(proposition);
-			}
-	
-	
 	@GetMapping("/public/propositions/{id}")
 	public ApiResponse<Proposition> getPropositionById(@PathVariable Long id) {
 		return propositionService.getPropositionById(id);

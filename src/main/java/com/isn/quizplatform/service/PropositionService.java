@@ -21,8 +21,6 @@ import jakarta.servlet.http.HttpSession;
 public class PropositionService {
 	
 	
-
-
 		private PropositionRepository PR;
 		
 		
@@ -31,25 +29,18 @@ public class PropositionService {
 	        
 	    }
 
-		public ApiResponse<Proposition> create(Proposition proposition) {
-			try {
-				
-				return new ApiResponse<>(proposition, 200, null); // Succès, utilisateur créé
-			} catch (Exception e) {
-				return new ApiResponse<>(null, 500, "creation.failed"); // Erreur interne
-			}
-		}
+		
 		
 		public ApiResponse<Proposition> getPropositionById(Long id) {
 			try{
 				Optional<Proposition> proposition = PR.findById(id);
 				if(proposition.isPresent()){
-					return new ApiResponse<>(proposition.get(),201,null);
+					return new ApiResponse<>(proposition.get(),200,"proposition get with success");
 				}else {
-					return new ApiResponse<>(null,500,"Get personne failde !");
+					return new ApiResponse<>(null,404,"proposition not found");
 				}
 			}catch (Exception e){
-				return new ApiResponse<>(null,400,"The id is invailde !");
+				return new ApiResponse<>(null,500,"Error fetching the propostion");
 			}
 		}
 		
@@ -63,16 +54,24 @@ public class PropositionService {
 	        PR.save(proposition);
 			return new ApiResponse<>(proposition,201,null);
 			}catch (RuntimeException e){
-				return new ApiResponse<>(null,500,"Update failed !");
+				return new ApiResponse<>(null,404,"Proposition not found!");
+			}catch (Exception e){
+				return new ApiResponse<>(null,500,"Update failed ");
 			}
 	    }
 		
 	    public ApiResponse<Proposition> deleteProposition(Long id) {
 			try {
-				PR.deleteById(id);
-				return new ApiResponse<>(null,201,null);
+				Proposition proposition = PR.findById(id).orElseThrow();
+				if (proposition != null) {
+					PR.deleteById(id);
+					return new ApiResponse<>(null,200,"Proposition deleted");
+				}else {
+					return new ApiResponse<>(null,500, "Delete failed");
+				}
+				
 			}catch (RuntimeException e){
-				return new ApiResponse<>(null,500, "Delete faied !");
+				return new ApiResponse<>(null,404, "Proposition not found !");
 			}
 
 	    }
