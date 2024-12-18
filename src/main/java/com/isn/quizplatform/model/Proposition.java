@@ -31,7 +31,7 @@ public class Proposition {
         this.correct = correct;
         this.libelle = libelle;
         this.id = id;
-    }
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
     public Proposition (int correct, String libelle)
     {   
@@ -63,11 +63,13 @@ public class Proposition {
         this.id = id;
     }
 
- 
-
     @Override
     public String toString() {
         return "Proposition [correct=" + correct + ", libelle=" + libelle + ", id=" + id  + "]";
     }
     
+
 } 
+
+
+
