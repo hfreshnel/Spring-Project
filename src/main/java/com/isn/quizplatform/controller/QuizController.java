@@ -32,7 +32,7 @@ public class QuizController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @GetMapping("/{id}/questionIds")
+    @GetMapping("admin/{id}/questionIds")
     public ResponseEntity<ApiResponse<List<Long>>> getMethodName(@PathVariable Long id) {
         ApiResponse<List<Long>> response = quizService.getQuestionIdsByQuizId(id);
         return ResponseEntity.status(response.getCode()).body(response);
