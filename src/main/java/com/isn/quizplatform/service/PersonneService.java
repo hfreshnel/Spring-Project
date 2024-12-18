@@ -27,9 +27,9 @@ public class PersonneService {
 	//Get all users
 	public ApiResponse<List<Personne>> getAllPersonne(){
 		try {
-			return new ApiResponse<List<Personne>>(PR.findAll(),201,null);
+			return new ApiResponse<>(PR.findAll(),200,null);
 		}catch (RuntimeException e){
-			return new ApiResponse<>(null, 500, "Get All users failed");
+			return new ApiResponse<>(null, 500, "person.get_failed");
 		}
 	}
 
@@ -38,19 +38,19 @@ public class PersonneService {
 		try{
 			Optional<Personne> personne = PR.findById(id);
 			if(personne.isPresent()){
-				return new ApiResponse<>(personne.get(),201,null);
+				return new ApiResponse<>(personne.get(),200,null);
 			}else {
-				return new ApiResponse<>(null,500,"Get personne failde !");
+				return new ApiResponse<>(null,404,"person.get_id_failed");
 			}
 		}catch (Exception e){
-			return new ApiResponse<>(null,400,"The id is invailde !");
+			return new ApiResponse<>(null,500,"person.get_failed");
 		}
 	}
 
 	//Update the info insert by userid
     public ApiResponse<Personne> updatePersonne(Long id, Personne personneInfo) {
 		try{
-    	Personne personne = PR.findById(id).orElseThrow();
+    	Personne personne = PR.findById(id).orElseThrow(() -> new RuntimeException("person.get_id_failed"));
     	personne.setNom(personneInfo.getNom());
 		personne.setPrenom(personneInfo.getPrenom());
 
@@ -60,19 +60,20 @@ public class PersonneService {
 		personne.setMail(personneInfo.getMail());
 
         PR.save(personne);
-		return new ApiResponse<>(personne,201,null);
+		return new ApiResponse<>(personne,200,null);
 		}catch (RuntimeException e){
-			return new ApiResponse<>(null,500,"Update faieled !");
+			return new ApiResponse<>(null,404,e.getMessage());
 		}
     }
 
 	//Delete user by userid
     public ApiResponse<Personne> deletePersonne(Long id) {
 		try {
+			PR.findById(id).orElseThrow(() -> new RuntimeException("person.get_id_failed"));
 			PR.deleteById(id);
-			return new ApiResponse<>(null,201,null);
+			return new ApiResponse<>(null,200,null);
 		}catch (RuntimeException e){
-			return new ApiResponse<>(null,500, "Delete faied !");
+			return new ApiResponse<>(null,404, e.getMessage());
 		}
 
     }

@@ -21,38 +21,43 @@ public class AuthService {
         this.PR = PR;
         this.passwordEncoder = passwordEncoder;
     }
-	
+
+	//Inscription un utilisateur
 	public ApiResponse<Personne> register(Personne personne) {
 			if(PR.findByMail(personne.getMail()).isPresent()){
-				return new ApiResponse<>(null, 400, "The user already exists");
+				return new ApiResponse<>(null, 404, "auth.user_already_exists");
 			}
-			String hashedPassword = passwordEncoder.encode(personne.getMdp());
-			personne.setMdp(hashedPassword);
-
+			if(personne.getMdp().length() < 6){
+				return new ApiResponse<>(null, 404, "auth.mdp_form_wrong");
+			}else {
+				String hashedPassword = passwordEncoder.encode(personne.getMdp());
+				personne.setMdp(hashedPassword);
+			}
 			personne.setRole(0);
 		try {
 			PR.save(personne);
-			return new ApiResponse<>(personne, 201, null); // Succès, utilisateur créé
+			return new ApiResponse<>(personne, 200, null); // Succès, utilisateur créé
 		} catch (Exception e) {
-			return new ApiResponse<>(null, 500, "registration failed"); // Erreur interne
+			return new ApiResponse<>(null, 500, "auth.registration_failed"); // Erreur interne
 		}
 	}
-	
+
+	//User login
 	public ApiResponse<Personne> login(String email, String password) {
 		try {
 			Personne personne = PR.findByMail(email)
-					.orElseThrow(() -> new RuntimeException("E-mail ou mot de passe invalide"));
+					.orElseThrow(() -> new RuntimeException("auth.invalid_credentials"));
 
 			if (!passwordEncoder.matches(password, personne.getMdp())) {
-				throw new RuntimeException("E-mail ou mot de passe invalide");
+				throw new RuntimeException("E-mail ou mot de passe invalid");
 			}
 
 			System.out.println("Utilisateur connecté avec succès : " + personne.getMail());
-			return new ApiResponse<>(personne, 201, null);
+			return new ApiResponse<>(personne, 200, null);
 		} catch (RuntimeException e){
-			return new ApiResponse<>(null, 400, "E-mail ou mot de passe invalide");
+			return new ApiResponse<>(null, 404, e.getMessage());
 		} catch (Exception e){
-			return new ApiResponse<>(null, 500, "Login.failed");
+			return new ApiResponse<>(null, 500, "auth.login_failed");
 		}
 	}
 

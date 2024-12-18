@@ -19,16 +19,16 @@ public class Quiz {
     @Column(name = "etat", nullable = false)
     private int etat;
 
-    @Column(name = "dateDebutQuiz") 
+    @Column(name = "dateDebutQuiz" , nullable = false) 
     private Timestamp dateDebutQuiz;
 
-    @Column(name = "numeroQuestionCourante")
+    @Column(name = "numeroQuestionCourante", nullable = false)
     private int noQuestionCourante;
 
-    @Column(name = "etape")
+    @Column(name = "etape", nullable = false)
     private int etape;
 
-    @Column(name = "dateDebutQuestion")
+    @Column(name = "dateDebutQuestion", nullable = false)
     private Timestamp dateDebutQuestion;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
