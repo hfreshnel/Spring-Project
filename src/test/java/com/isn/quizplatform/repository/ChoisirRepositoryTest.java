@@ -21,7 +21,7 @@ import java.util.List;
 
 @SpringBootTest
 @ActiveProfiles("test") // Utilise application-test.properties
-public class ChoisirRepositoryTests {
+public class ChoisirRepositoryTest {
 
     @Autowired
     private ChoisirRepository choisirRepository;
