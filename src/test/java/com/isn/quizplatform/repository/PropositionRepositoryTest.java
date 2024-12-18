@@ -1,25 +1,13 @@
 package com.isn.quizplatform.repository;
 
-import com.isn.quizplatform.Application;
 import com.isn.quizplatform.model.Proposition;
-import com.isn.quizplatform.repository.PropositionRepository;
-
 import jakarta.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Repository;
-import org.junit.jupiter.api.Test;
-
 import org.springframework.test.context.ActiveProfiles;
-
-import com.isn.quizplatform.model.Personne;
-
-import java.net.ProxySelector;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;

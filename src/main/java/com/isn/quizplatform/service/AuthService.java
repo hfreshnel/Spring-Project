@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.isn.quizplatform.model.Personne;
 import com.isn.quizplatform.repository.PersonneRepository;
 
-import jakarta.servlet.http.HttpSession;
-
 @Service
 public class AuthService {
 

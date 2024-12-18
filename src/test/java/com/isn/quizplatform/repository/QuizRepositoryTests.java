@@ -13,11 +13,9 @@ import com.isn.quizplatform.model.Quiz;
 import com.isn.quizplatform.model.Question;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Date;
 import java.util.Collections;
 
 import org.springframework.transaction.annotation.Transactional;

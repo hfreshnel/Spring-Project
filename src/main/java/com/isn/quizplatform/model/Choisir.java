@@ -30,16 +30,18 @@ public class Choisir {
     public Choisir() {
     }
 
-    public Choisir(Long id, Personne personne, Quiz quiz, Timestamp heure) {
-        this.id = id;
+    public Choisir(Personne personne, Quiz quiz, Proposition proposition, Timestamp heure) {
         this.personne = personne;
         this.quiz = quiz;
+        this.proposition = proposition;
         this.heure = heure;
     }
 
-    public Choisir(Personne personne, Quiz quiz, Timestamp heure) {
+    public Choisir(Long id, Personne personne, Quiz quiz, Proposition proposition, Timestamp heure) {
+        this.id = id;
         this.personne = personne;
         this.quiz = quiz;
+        this.proposition = proposition;
         this.heure = heure;
     }
 
@@ -67,6 +69,14 @@ public class Choisir {
         this.quiz = quiz;
     }
 
+    public Proposition getProposition() {
+        return proposition;
+    }
+
+    public void setProposition(Proposition proposition) {
+        this.proposition = proposition;
+    }
+
     public Timestamp getHeure() {
         return heure;
     }
@@ -77,7 +87,8 @@ public class Choisir {
 
     @Override
     public String toString() {
-        return "Choisir [id=" + id + ", personne=" + personne + ", quiz=" + quiz + ", heure=" + heure + "]";
+        return "Choisir [heure=" + heure + ", id=" + id + ", personne=" + personne + ", proposition=" + proposition
+                + ", quiz=" + quiz + "]";
     }
 
 }
