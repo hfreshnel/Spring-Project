@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import com.isn.quizplatform.model.Personne;
 import com.isn.quizplatform.service.PersonneService;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class PersonneController{
     
