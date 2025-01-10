@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.isn.quizplatform.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,22 +25,22 @@ public class PersonneController{
 	private PersonneService PS;
 	
 	@GetMapping("/admin/personnes")
-	public ApiResponse<List<Personne>> getAllPersonne(){
+	public ResponseEntity<ApiResponse<List<Personne>>> getAllPersonne(){
 		return PS.getAllPersonne();
 	}
 	
 	@GetMapping("/public/personnes/{id}")
-	public ApiResponse<Personne> getPersonneById(@PathVariable Long id) {
+	public ResponseEntity<ApiResponse<Personne>> getPersonneById(@PathVariable Long id) {
 		return PS.getPersonneById(id);
 	}
 	
 	@PutMapping("/public/personnes/{id}")
-	public ApiResponse<Personne> updatePersonne(@PathVariable Long id, @RequestBody Personne personneInfo) {
+	public ResponseEntity<ApiResponse<Personne>> updatePersonne(@PathVariable Long id, @RequestBody Personne personneInfo) {
 		return PS.updatePersonne(id, personneInfo);
 	}
 	
 	@DeleteMapping("/admin/personnes/{id}")
-	public ApiResponse<Personne> deletePersonne(@PathVariable Long id) {
+	public ResponseEntity<ApiResponse<Personne>> deletePersonne(@PathVariable Long id) {
 		return PS.deletePersonne(id);
 	}
 	
