@@ -6,47 +6,50 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Collections;
 
-/**
- * JwtAuthenticationFilter: A custom filter for processing JWT tokens.
- */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
 
-    // Constructor injection for the JwtUtils utility class
     public JwtAuthenticationFilter(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
-	@Override
-	protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
-			jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain)
-			throws jakarta.servlet.ServletException, IOException {
-		 String authorizationHeader = request.getHeader("Authorization");
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
 
-	        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-	            String token = authorizationHeader.substring(7);
+        String authorizationHeader = request.getHeader("Authorization");
 
-	            if (jwtUtils.validateToken(token)) {
-	                String role = jwtUtils.extractRole(token);
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String token = authorizationHeader.substring(7);
 
-	                SecurityContextHolder.getContext().setAuthentication(
-	                    new UsernamePasswordAuthenticationToken(
-	                        null, 
-	                        null, 
-	                        Collections.singleton(new SimpleGrantedAuthority(role))
-	                    )
-	                );
-	            }
-	        }
+            if (jwtUtils.validateToken(token)) {
+                String mail = jwtUtils.extractEmail(token); // Récupérer l'email depuis le token
+                String role = jwtUtils.extractRole(token); // Récupérer le rôle depuis le token
 
-	        filterChain.doFilter(request, response);
-		
-	}
-    
+                // Créer une authentification avec l'email comme principal
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        mail, // Principal : email de l'utilisateur
+                        null, // Credentials : non utilisé
+                        Collections.singleton(new SimpleGrantedAuthority(role)) // Rôle
+                );
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        }
+
+        // Continuer avec la chaîne de filtres
+        filterChain.doFilter(request, response);
+    }
 }
