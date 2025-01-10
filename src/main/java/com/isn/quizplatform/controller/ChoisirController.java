@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.isn.quizplatform.model.ApiResponse;
 import com.isn.quizplatform.service.ChoisirService;
@@ -11,6 +12,7 @@ import com.isn.quizplatform.service.ChoisirService;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class ChoisirController {
 
