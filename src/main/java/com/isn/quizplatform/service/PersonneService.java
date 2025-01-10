@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import com.isn.quizplatform.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,30 +26,35 @@ public class PersonneService {
 	}
 
 	//Get all users
-	public ApiResponse<List<Personne>> getAllPersonne(){
+	public ResponseEntity<ApiResponse<List<Personne>>> getAllPersonne(){
 		try {
-			return new ApiResponse<>(PR.findAll(),200,null);
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ApiResponse<>(PR.findAll(),200,null));
 		}catch (RuntimeException e){
-			return new ApiResponse<>(null, 500, "person.get_failed");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(null, 500, "person.get_failed"));
 		}
 	}
 
 	//Get a user by userid
-	public ApiResponse<Personne> getPersonneById(Long id) {
+	public ResponseEntity<ApiResponse<Personne>> getPersonneById(Long id) {
 		try{
 			Optional<Personne> personne = PR.findById(id);
 			if(personne.isPresent()){
-				return new ApiResponse<>(personne.get(),200,null);
+				return ResponseEntity.status(HttpStatus.OK)
+						.body(new ApiResponse<>(personne.get(),200,null));
 			}else {
-				return new ApiResponse<>(null,404,"person.get_id_failed");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(null,404,"person.get_id_failed"));
 			}
 		}catch (Exception e){
-			return new ApiResponse<>(null,500,"person.get_failed");
+			return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE)
+					.body(new ApiResponse<>(null,500,"person.get_failed"));
 		}
 	}
 
 	//Update the info insert by userid
-    public ApiResponse<Personne> updatePersonne(Long id, Personne personneInfo) {
+    public ResponseEntity<ApiResponse<Personne>> updatePersonne(Long id, Personne personneInfo) {
 		try{
     	Personne personne = PR.findById(id).orElseThrow(() -> new RuntimeException("person.get_id_failed"));
     	personne.setNom(personneInfo.getNom());
@@ -62,26 +69,31 @@ public class PersonneService {
 
 		String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
 		if(!personneInfo.getMail().matches(emailRegex)){
-			return new ApiResponse<>(null, 404, "person.email_from_wrong");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(null, 404, "person.email_from_wrong"));
 		}else {
 			personne.setMail(personneInfo.getMail());
 		}
 
         PR.save(personne);
-		return new ApiResponse<>(personne,200,null);
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ApiResponse<>(personne,200,null));
 		}catch (RuntimeException e){
-			return new ApiResponse<>(null,404,e.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(null,404,e.getMessage()));
 		}
     }
 
 	//Delete user by userid
-    public ApiResponse<Personne> deletePersonne(Long id) {
+    public ResponseEntity<ApiResponse<Personne>> deletePersonne(Long id) {
 		try {
 			PR.findById(id).orElseThrow(() -> new RuntimeException("person.get_id_failed"));
 			PR.deleteById(id);
-			return new ApiResponse<>(null,200,null);
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ApiResponse<>(null,200,null));
 		}catch (RuntimeException e){
-			return new ApiResponse<>(null,404, e.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(null,404, e.getMessage()));
 		}
 
     }
