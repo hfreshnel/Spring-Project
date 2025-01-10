@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
+@Table(name="proposition")    
 public class Proposition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
