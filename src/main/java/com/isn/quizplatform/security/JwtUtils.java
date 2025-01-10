@@ -13,7 +13,6 @@ import java.util.Map;
 @Component
 public class JwtUtils {
 
-    // Charger la clé secrète depuis application.properties
     @Value("${jwt.secret}")
     private String secretKey;
 
@@ -21,7 +20,6 @@ public class JwtUtils {
 
     private Key key;
 
-    // Méthode exécutée après l'injection des dépendances
     @PostConstruct
     public void init() {
         if (secretKey == null || secretKey.isEmpty()) {
@@ -33,13 +31,14 @@ public class JwtUtils {
     // Générer un token JWT
     public String generateToken(String mail, int role) {
         return Jwts.builder()
-            .setSubject(mail)
-            .setClaims(Map.of("role", role)) // Ajouter le rôle comme claim
+            .setClaims(Map.of("role", role)) // Ajouter les claims
+            .setSubject(mail) // Définir l'email comme sujet (après setClaims)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .signWith(key, SignatureAlgorithm.HS256)
             .compact();
     }
+
 
     // Valider un token JWT
     public boolean validateToken(String token) {
@@ -51,16 +50,24 @@ public class JwtUtils {
         }
     }
 
-    // Extraire et mapper le rôle
+    // Extraire le rôle depuis le token
     public String extractRole(String token) {
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
         int roleValue = claims.get("role", Integer.class);
 
-        // Mapper l'entier vers un rôle Spring Security
         return switch (roleValue) {
             case 0 -> "ROLE_PUBLIC";
             case 1000 -> "ROLE_ADMIN";
             default -> throw new IllegalArgumentException("Rôle inconnu : " + roleValue);
         };
+    }
+
+    // Extraire l'email (subject) depuis le token
+    public String extractEmail(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+        
+        String email = claims.getSubject(); // Récupérer l'email depuis le subject
+        System.out.println("Email extrait du token: " + email);
+        return email;
     }
 }
