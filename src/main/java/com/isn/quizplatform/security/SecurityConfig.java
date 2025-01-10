@@ -21,10 +21,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
 
-                        .requestMatchers("public/questions/**","public/questions","/public/auth/register","/public/proposition/{id}","/admin/propositions/{id}","/admin/proposition/create", "/public/personnes/{id}","/admin/personnes","/admin/personnes/{id}","/public/auth/login","/swagger-ui/**","/public/quiz/**", "/admin/**", "/v3/api-docs/**")
-
-
-                        .permitAll()
+                        .requestMatchers("public/questions/**","public/questions","/public/proposition/{id}", "/public/personnes/{id}","/public/quiz/**").hasRole("PUBLIC")
+                        .requestMatchers("/admin/**","/admin/personnes/{id}","/admin/propositions/{id}","/admin/proposition/create","/admin/personnes").hasRole("ADMIN")
+                        .requestMatchers("/v3/api-docs/**","/swagger-ui/**","/public/auth/register","/public/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
