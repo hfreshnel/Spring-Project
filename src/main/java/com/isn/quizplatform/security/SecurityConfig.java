@@ -19,31 +19,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
-
+        	.cors().and()
                 .authorizeHttpRequests(auth -> auth
-
-
-                        .requestMatchers("public/questions/**","public/questions","/public/proposition/{id}", "/public/personnes/{id}","/public/quiz/**").hasRole("PUBLIC")
+ 
+ 
+                        .requestMatchers("public/questions/**","public/questions","/public/proposition/{id}", "/public/personnes/{id}","/public/quiz/**").hasAnyRole("PUBLIC","ADMIN")
                         .requestMatchers("/admin/**","/admin/personnes/{id}","/admin/propositions/{id}","/admin/proposition/create","/admin/personnes").hasRole("ADMIN")
                         .requestMatchers("/v3/api-docs/**","/swagger-ui/**","/public/auth/register","/public/auth/login").permitAll()
-
+ 
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable());
-
+ 
     return http.build();
     }
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(final CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:8080")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
-						.allowCredentials(true);
-			}
-		};
-	}
+   
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(final CorsRegistry registry) {
+                // les origines nécessaires 
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(false);  // Si vous utilisez des cookies ou une authentification HTTP
+            }
+        };
+    }
 }
