@@ -4,6 +4,7 @@ import com.isn.quizplatform.model.ApiResponse;
 import com.isn.quizplatform.model.AuthResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,12 +22,12 @@ public class AuthController {
 	private AuthService AS;
 	
 	@PostMapping("/public/auth/register")
-	public ApiResponse<Personne> register(@RequestBody Personne personne) {
+	public ResponseEntity<ApiResponse<Personne>> register(@RequestBody Personne personne) {
 		return AS.register(personne);
 	}
 	
 	@PostMapping("/public/auth/login")
-	public ApiResponse<AuthResponse> login(@RequestBody LoginRequest loginrequest) {
+	public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody LoginRequest loginrequest) {
 		return AS.login(loginrequest.getMail(), loginrequest.getMdp());
 	}
 
